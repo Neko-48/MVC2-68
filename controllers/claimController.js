@@ -25,7 +25,7 @@ export const getClaims = (req, res) => {
     const userRole = req.session.role;
     const userId = req.session.userId;
 
-    // กรองข้อมูล: ถ้าเป็นประชาชน ให้เห็นแค่ของตัวเอง 
+    // กรองข้อมูล ประชาชนให้เห็นแค่ของตัวเอง 
     let filteredClaims = (userRole === 'official') 
         ? claims 
         : claims.filter(c => c.claimantId === userId);
@@ -107,7 +107,7 @@ export const renderCreatePage = (req, res) => {
         return res.render('create', { claimants: person ? [person] : [] });
     }
 
-    // สำหรับเจ้าหน้าที่: แสดงรายชื่อคนที่ยังไม่เคยยื่นคำขอ
+    // กันไม่ให้คนที่ยื่นซ้ำ
     const alreadyClaimedIds = claims.map(c => c.claimantId);
     const availableClaimants = claimants.filter(c => !alreadyClaimedIds.includes(c.id));
     res.render('create', { claimants: availableClaimants });
