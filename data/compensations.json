@@ -1,0 +1,5 @@
+[
+  { "claimId": "10000001", "amount": 6500, "calculatedDate": "2026-02-01T09:00:00Z" },
+  { "claimId": "25410002", "amount": 15000, "calculatedDate": "2026-02-02T10:30:00Z" },
+  { "claimId": "55214087", "amount": 20000, "calculatedDate": "2026-02-06T14:20:00Z" }
+]

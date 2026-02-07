@@ -1,0 +1,3 @@
+[
+  { "policyId": "P01", "name": "เยียวยาโควิด", "maxCeiling": 20000, "lowIncomeThreshold": 6500, "highIncomeThreshold": 50000 }
+]

@@ -1,0 +1,10 @@
+[
+  { "id": "C001", "firstName": "สมชาย", "lastName": "สายลม", "monthlyIncome": 4500, "type": "low_income" },
+  { "id": "C002", "firstName": "สมหญิง", "lastName": "รักษ์ดี", "monthlyIncome": 15000, "type": "general" },
+  { "id": "C003", "firstName": "วิชัย", "lastName": "เก่งกาจ", "monthlyIncome": 60000, "type": "high_income" },
+  { "id": "C004", "firstName": "มานี", "lastName": "มีใจ", "monthlyIncome": 35000, "type": "general" },
+  { "id": "C005", "firstName": "ปิติ", "lastName": "ยินดี", "monthlyIncome": 5500, "type": "low_income" },
+  { "id": "C006", "firstName": "อนันต์", "lastName": "มั่นคง", "monthlyIncome": 80000, "type": "high_income" },
+  { "id": "C007", "firstName": "พรทิพย์", "lastName": "สวยงาม", "monthlyIncome": 20000, "type": "general" },
+  { "id": "C008", "firstName": "วีระ", "lastName": "อุตสาหะ", "monthlyIncome": 6400, "type": "low_income" }
+]

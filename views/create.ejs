@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>ยื่นคำขอเยียวยา</title>
+    <style>
+        body { font-family: sans-serif; margin: 40px; line-height: 1.6; }
+        .container { max-width: 500px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; }
+        input, select { width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box; }
+        .result-box { background: #e7f3fe; padding: 15px; border-left: 6px solid #2196F3; margin-top: 20px; }
+        button { background: #4CAF50; color: white; padding: 10px 15px; border: none; cursor: pointer; width: 100%; font-size: 16px; }
+        button:hover { background: #45a049; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>ยื่นคำขอเยียวยาใหม่</h2>
+    <form action="/claims/create" method="POST">
+        <div class="form-group">
+            <label>เลือกผู้ขอเยียวยา (ข้อมูลจากระบบ):</label>
+            <select name="claimantId" id="claimantId" required onchange="updateIncome()">
+                <option value="">-- กรุณาเลือก --</option>
+                <% claimants.forEach(person => { %>
+                    <option value="<%= person.id %>" data-income="<%= person.monthlyIncome %>" data-type="<%= person.type %>">
+                        <%= person.firstName %> <%= person.lastName %>
+                    </option>
+                <% }) %>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>รายได้ต่อเดือน (บาท):</label>
+            <input type="number" name="income" id="income" readonly>
+        </div>
+
+        <div class="form-group">
+            <label>ประเภทผู้ขอ:</label>
+            <input type="text" name="typeDisplay" id="typeDisplay" readonly>
+            <input type="hidden" name="type" id="type">
+        </div>
+
+        <div class="result-box">
+            <strong>ยอดเงินเยียวยาที่คาดว่าจะได้รับ:</strong>
+            <h3 id="displayAmount">0 บาท</h3>
+        </div>
+
+        <button type="submit">ยืนยันและบันทึกข้อมูล</button>
+    </form>
+    <p><a href="/claims">กลับไปหน้ารายการ</a></p>
+</div>
+
+<script>
+    async function updateIncome() {
+        const select = document.getElementById('claimantId');
+        const selectedOption = select.options[select.selectedIndex];
+        
+        if (!selectedOption.value) return;
+
+        const income = parseFloat(selectedOption.getAttribute('data-income'));
+        const type = selectedOption.getAttribute('data-type');
+        
+        document.getElementById('income').value = income;
+        document.getElementById('type').value = type;
+        document.getElementById('typeDisplay').value = type === 'low_income' ? 'รายได้น้อย' : (type === 'high_income' ? 'รายได้สูง' : 'ทั่วไป');
+
+        // คำนวณเงินเยียวยาจากระบบ (Model) ผ่าน API
+        try {
+            const response = await fetch(`/claims/calculate?income=${income}&type=${type}`);
+            const data = await response.json();
+            
+            // แสดงยอดเงินที่คำนวณให้
+            document.getElementById('displayAmount').innerText = data.amount.toLocaleString() + " บาท";
+        } catch (error) {
+            console.error("การคำนวณผิดพลาด:", error);
+        }
+    }
+</script>
+
+</body>
+</html>

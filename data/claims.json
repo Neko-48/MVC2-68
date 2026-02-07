@@ -1,0 +1,7 @@
+[
+  { "claimId": "10000001", "claimantId": "C001", "date": "2026-02-01", "status": "approved" },
+  { "claimId": "25410002", "claimantId": "C002", "date": "2026-02-02", "status": "approved" },
+  { "claimId": "55214087", "claimantId": "C004", "date": "2026-02-06", "status": "approved" },
+  { "claimId": "88741235", "claimantId": "C005", "date": "2026-02-07", "status": "pending" },
+  { "claimId": "12345678", "claimantId": "C006", "date": "2026-02-07", "status": "rejected" }
+]
